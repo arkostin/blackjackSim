@@ -32,3 +32,18 @@ class Hand:
             numAces -= 1
         
         return val
+
+    def isSoft(self):
+        val = 0
+        numAces = 0
+
+        # Iterate over the cards and get the value, counting aces as 1 and keeping track of how many aces.
+        for card in self.cards:
+            val += self.nameToMinValMap[card.name]
+            if (card.name == "A"):
+                numAces += 1
+
+        return (val <= 11) and (numAces > 0)
+
+    def isBust(self):
+        return self.getHandVal() > 21

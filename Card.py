@@ -7,6 +7,9 @@ class Card:
     def __init__(self,suit,name):
         self.suit = suit
         self.name = name
+    
+    def getCardStr(self):
+        return (self.name + " of " + self.suitNameMap[self.suit])
 
     def printCard(self):
-        print(self.name + " of " + self.suitNameMap[self.suit])
+        print(self.getCardStr())
