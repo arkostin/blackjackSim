@@ -47,3 +47,9 @@ class Hand:
 
     def isBust(self):
         return self.getHandVal() > 21
+
+    def isPair(self):
+        if(len(self.cards) != 2):
+            return False
+
+        return self.nameToMinValMap[self.cards[0].name] == self.nameToMinValMap[self.cards[1].name]
