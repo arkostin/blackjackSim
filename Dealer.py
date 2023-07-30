@@ -7,6 +7,10 @@ class Dealer:
         self.standSoft17 = standSoft17
         self.hand = Hand([], 0)
 
+    # Deal out the initial face up and face down cards
+    def dealThemselves(self, deck):
+        self.hand.addCards(deck.dealCards(2))
+
     def addCards(self, cards):
         self.hand.addCards(cards)
 
@@ -15,11 +19,17 @@ class Dealer:
         val = self.hand.getHandVal()
 
         if val < 17:
-            return true
+            return True
         elif val > 17:
-            return false
+            return False
         else:
-            return hand.isSoft() and not self.standSoft17
+            return self.hand.isSoft() and not self.standSoft17
+
+    def hit(self, deck):
+        self.hand.addCards(deck.dealCards(1))
+
+    def clearHand(self):
+        self.hand = Hand([], 0)
 
     # Get the dealer's face-up card
     def getShowingCard(self):

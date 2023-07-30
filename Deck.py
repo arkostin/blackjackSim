@@ -4,12 +4,13 @@ import random
 from Card import Card
 
 class Deck:
-    def __init__(self, numDecks):
+    def __init__(self, numDecks, shufflePct):
         # Declare vars
         self.cards = []
         self.numDecks = numDecks
         self.index = 0
         self.numCards = numDecks * 52
+        self.shufflePct = shufflePct
 
         # Create the shoe. For each deck, name, and suit, add that card to the shoe.
         for i in range(numDecks):
@@ -20,6 +21,10 @@ class Deck:
     def printDeck(self):
         for card in self.cards:
             card.printCard()
+
+    # Returns whether or not the deck needs to be shuffled
+    def needsShuffle(self):
+        return (self.shufflePct * self.numCards) <= self.index
 
     def shuffle(self):
         # Shuffle the deck by iterating over each card and swapping it with a card in the range [card, end of deck]

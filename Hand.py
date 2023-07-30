@@ -9,6 +9,12 @@ class Hand:
         self.cards = cards
         self.bet = bet
 
+    def getDealt(self, deck):
+        self.addCards(deck.dealCards(2))
+    
+    def hit(self, deck):
+        self.addCards(deck.dealCards(1))
+
     def addCards(self, cards):
         self.cards += cards
     
