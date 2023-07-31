@@ -31,6 +31,7 @@ class Deck:
         for i in range(self.numCards):
             j = random.randrange(i, self.numCards)
             self.cards[i], self.cards[j] = self.cards[j], self.cards[i]
+        self.index = 0
 
     def dealCards(self, numCardsToDeal):
         # Safety check

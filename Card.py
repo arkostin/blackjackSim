@@ -1,5 +1,7 @@
 # Card object
 
+from Hand import Hand
+
 class Card:
 
     suitNameMap = {"S":"Spades", "C":"Clubs", "D":"Diamonds", "H":"Hearts"}
@@ -13,3 +15,9 @@ class Card:
 
     def printCard(self):
         print(self.getCardStr())
+    
+    def getCardValForStats(self):
+        cardName = str(Hand.nameToMinValMap[self.name])
+        if cardName == "1":
+            cardName = "A"
+        return cardName

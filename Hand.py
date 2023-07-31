@@ -5,15 +5,11 @@ class Hand:
     nameToMinValMap.update({i: 10 for i in ["J","Q","K"]})
     nameToMinValMap.update({"A":1})
 
-    def __init__(self, cards, bet):
+    def __init__(self, cards):
         self.cards = cards
-        self.bet = bet
 
     def getDealt(self, deck):
         self.addCards(deck.dealCards(2))
-    
-    def hit(self, deck):
-        self.addCards(deck.dealCards(1))
 
     def addCards(self, cards):
         self.cards += cards
@@ -59,3 +55,15 @@ class Hand:
             return False
 
         return self.nameToMinValMap[self.cards[0].name] == self.nameToMinValMap[self.cards[1].name]
+    
+    def getStatName(self):
+        if (self.isBust()):
+            return "Bust"
+
+        #if (self.isPair()):
+        #    return "P" + self.cards[0].getCardValForStats()
+
+        handVal = str(self.getHandVal())
+        if (self.isSoft()):
+            return "S" + handVal
+        return handVal
