@@ -52,14 +52,16 @@ class Data:
             self.printRow(playerHand)
 
     def printRow(self, playerHand):
-        for action in range(1):
+        for action in range(2):
             if action == 0:
                 print(playerHand + (" " * (4 - len(playerHand))), end='')
             else:
-                print(" " * 4)
+                print(" " * 4, end='')
 
             for dealerCard in self.dealerCards:
                 standResults = self.resultsArr[self.playerHandsMap[playerHand]][self.dealerCardsMap[dealerCard]][action]
                 standPercentage = "{0:.2f}".format(round((standResults[0] / (standResults[3] - standResults[1])) * 100, 2))
                 print(standPercentage + (" " * (7 - len(standPercentage))), end='')
+
+            print()
         print()

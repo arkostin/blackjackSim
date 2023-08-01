@@ -27,11 +27,12 @@ for _ in range(NUM_ROUNDS):
     dealerUpCardVal = dealer.getShowingCard().getCardValForStats()
 
     if (dealer.hand.getHandVal() == 21 or player.hand.getHandVal() == 21):
-        if False:
-            print("YEEEAH")
+        player.clearHand()
+        dealer.clearHand()
+        continue
     else:
         # Make a random choice, 0 - Stand, 1 - Hit, 2 - Double
-        choice = 0 #random.randrange(0, 3)
+        choice = random.randrange(0, 2)
 
         if (choice == 0):
             playerHandVal = player.hand.getHandVal()
@@ -40,7 +41,15 @@ for _ in range(NUM_ROUNDS):
             dealerHandVal = dealer.hand.getHandVal()
 
             data.compareHandsAndLogResult(player.hand.getStatName(), dealerUpCardVal, playerHandVal, dealerHandVal, choice)
-    
+        else:
+            playerHandName = player.hand.getStatName()
+            player.hit(deck)
+
+            dealer.hitUntilDone(deck)
+            dealerHandVal = dealer.hand.getHandVal()
+
+            data.compareHandsAndLogResult(playerHandName, dealerUpCardVal, player.hand.getHandVal(), dealerHandVal, choice)
+
     player.clearHand()
     dealer.clearHand()
 
