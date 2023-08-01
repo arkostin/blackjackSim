@@ -5,7 +5,7 @@ import numpy as np
 class Data:
     def __init__(self):
         # Create possible player and dealer hands/cards
-        self.playerHands = [str(val) for val in range(2,21)]
+        self.playerHands = [str(val) for val in range(4,21)]
         self.playerHands += ["S" + str(val) for val in range(12,21)]
         #playerHands += ["P" + str(val) for val in range(2,11)]
         #playerHands += ["PA"]
@@ -47,11 +47,19 @@ class Data:
         self.addResult(playerHandName, dealerCard, action, result)
 
     def printResults(self):
+        print("    " + "".join([dealerCard + " " * (7 - len(dealerCard)) for dealerCard in self.dealerCards]))
         for playerHand in self.playerHands:
+            self.printRow(playerHand)
+
+    def printRow(self, playerHand):
+        for action in range(1):
+            if action == 0:
+                print(playerHand + (" " * (4 - len(playerHand))), end='')
+            else:
+                print(" " * 4)
+
             for dealerCard in self.dealerCards:
-                standResults = self.resultsArr[self.playerHandsMap[playerHand]][self.dealerCardsMap[dealerCard]][0]
-                standPercentage = round((standResults[0] / (standResults[3] - standResults[1])) * 100, 2)
-                print("For " + playerHand + " vs " + dealerCard + " stand: " + str(standPercentage) + " (Won " + str(standResults[0]) + " out of " + str((standResults[3] - standResults[1])))
-
-        
-
+                standResults = self.resultsArr[self.playerHandsMap[playerHand]][self.dealerCardsMap[dealerCard]][action]
+                standPercentage = "{0:.2f}".format(round((standResults[0] / (standResults[3] - standResults[1])) * 100, 2))
+                print(standPercentage + (" " * (7 - len(standPercentage))), end='')
+        print()
