@@ -20,7 +20,7 @@ class Data:
     
     # Increments a result
     def addResult(self, playerHand, dealerCard, action, result):
-        self.resultsArr[self.playerHandsMap[playerHand]][self.dealerCardsMap[dealerCard]][action][0] += 1
+        self.resultsArr[self.playerHandsMap[playerHand]][self.dealerCardsMap[dealerCard]][action][3] += 1
         self.resultsArr[self.playerHandsMap[playerHand]][self.dealerCardsMap[dealerCard]][action][result] += 1
 
     # Compare the values of the player and dealer hands and return the result
@@ -42,7 +42,6 @@ class Data:
 
     # Given the player's starting hand, dealer's up-card, player hand, dealer hand, and action, gets the result and logs it to the results array.
     def compareHandsAndLogResult(self, playerHandName, dealerCard, playerHandVal, dealerHandVal, action):
-
         result = self.compareHandsAndGetResult(playerHandVal, dealerHandVal)
 
         self.addResult(playerHandName, dealerCard, action, result)
@@ -51,6 +50,8 @@ class Data:
         for playerHand in self.playerHands:
             for dealerCard in self.dealerCards:
                 standResults = self.resultsArr[self.playerHandsMap[playerHand]][self.dealerCardsMap[dealerCard]][0]
-                standPercentage = (standResults[1] / (standResults[0] - standResults[2]))
-                print("For " + playerHand + " vs " + dealerCard + " stand: " + str(standPercentage))
+                standPercentage = round((standResults[0] / (standResults[3] - standResults[1])) * 100, 2)
+                print("For " + playerHand + " vs " + dealerCard + " stand: " + str(standPercentage) + " (Won " + str(standResults[0]) + " out of " + str((standResults[3] - standResults[1])))
+
+        
 

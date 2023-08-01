@@ -13,7 +13,7 @@ data = Data()
 deck = Deck(4, 0.75)
 deck.shuffle()
 
-NUM_ROUNDS = 100000
+NUM_ROUNDS = 1000000
 
 # Init dealer
 dealer = Dealer(False)
@@ -27,16 +27,17 @@ for _ in range(NUM_ROUNDS):
     dealerUpCardVal = dealer.getShowingCard().getCardValForStats()
 
     if (dealer.hand.getHandVal() == 21 or player.hand.getHandVal() == 21):
-        print("Blackjack!")
+        if False:
+            print("YEEEAH")
     else:
         # Make a random choice, 0 - Stand, 1 - Hit, 2 - Double
         choice = 0 #random.randrange(0, 3)
 
         if (choice == 0):
             playerHandVal = player.hand.getHandVal()
-            dealerHandVal = dealer.hand.getHandVal()
 
             dealer.hitUntilDone(deck)
+            dealerHandVal = dealer.hand.getHandVal()
 
             data.compareHandsAndLogResult(player.hand.getStatName(), dealerUpCardVal, playerHandVal, dealerHandVal, choice)
     
